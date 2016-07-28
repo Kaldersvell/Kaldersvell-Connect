@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Kaldersvell Connect</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+
+  </head>
+  <body style="background-color: #555555; color: white;">
+    <div class="container-fluid fullHeight" style="background-color: #111111; text-align: center; margin: auto; content-align: center;">
+        
+    </div>
+
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <!-- Script imports etc  -->
+        <script src="jsLib/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+    
+    <script type="text/javascript">
+        function getContentHeight(){
+            if($(window).height() > 300)
+                {
+                    return $(window).height();
+                } else {
+                    return 300;
+                }
+            }
+        function dynCSS(){
+                $(".fullHeight").css("height", getContentHeight());
+                $(".thirdHeight").css("height", getContentHeight()/3);
+                $(".twoThirdHeight").css("height", 2*getContentHeight()/3);
+                $(".twoNinthHeight").css("height", 2*getContentHeight()/9);
+        }
+        function ValidateIPaddress(ipaddress)   
+        {  
+            if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress))  
+            {  
+                return (true);  
+            }    
+            return (false); 
+        }  
+
+        dynCSS();
+        ip = window.prompt("Please input the IP address of a Raspberry Pi running Kaldersvell OS","127.0.0.1");
+        while(!ValidateIPaddress(ip)){
+            ip = window.prompt("Please input a valid IP address","127.0.0.1");
+        }
+
+
+        window.onresize = dynCSS;
+    </script>
+  </body>
+</html>
+
