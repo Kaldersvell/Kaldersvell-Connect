@@ -1,12 +1,14 @@
 {
-  "name"    : "Kaldersvell-Connect",
-  "version" : "0.1.0",
-  "main"    : "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "devDependencies": {
-    "electron-prebuilt": "^1.2.0",
-    "http": "*"
-  }
+    "name": "Kaldersvell-Connect",
+    "version": "0.1.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "devDependencies": {
+        "electron-prebuilt": "^1.2.0",
+        "http": "*",
+        "simple-ssh": "*",
+        "json-file": "*"
+    }
 }

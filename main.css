@@ -1,3 +1,12 @@
-#ex1Slider .slider-selection {
-	background: #BABABA;
+.btn-default {
+    border-color: #999999;
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+;
+.btn-default:hover {
+    border-color: #DDDDDD;
+    background-color: #555555;
+    color: #DDDDDD;
 }

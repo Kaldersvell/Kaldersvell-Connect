@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Kaldersvell Connect</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+
+</head>
+
+<body style="background-color: #111111; color: #999999;">
+    <div class="container-fluid" style="background-color: #111111; text-align: center; margin: auto; padding-top: 20px; content-align: center;">
+        <div class="row">
+            <h1>New Connection</h1>
+        </div>
+        <div class="row" style="content-align: center;">
+            <label for="name">Connection Name:</label>
+            <input type="text" class="form-control" id="usr" align="middle">
+            <div id="alert-container2"></div>
+            <br>
+            <label for="ip">IP Address:</label>
+            <input type="text" class="form-control" id="ip" align="middle">
+            <div id="alert-container"></div>
+            <br>
+            <label for="pwd">Root Password:</label>
+            <input type="password" class="form-control" id="pwd" align="middle">
+            <br>
+        </div>
+        <div class="row">
+            <a href="index.html" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left"></span>
+            </a>
+            <button id="save" onclick="record();" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Insert this line above script imports  -->
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <!-- Script imports etc  -->
+    <script src="jsLib/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Insert this line after script imports -->
+    <script>
+        if (window.module) module = window.module;
+    </script>
+
+    <script type="text/javascript">
+        function ValidateIPaddress(ipaddress) {
+            if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
+                return (true);
+            }
+            return (false);
+        }
+
+        function record() {
+            if (document.getElementById('name') != null) {
+                var name = document.getElementById('name').value;
+            } else {
+                var name;
+            }
+            if (document.getElementById('ip') != null) {
+                var ip = document.getElementById('ip').value;
+            } else {
+                var ip;
+            }
+            if (document.getElementById('pwd') != null) {
+                var pwd = document.getElementById('pwd').value;
+            } else {
+                var pwd;
+            }
+            if (!ValidateIPaddress(ip)) {
+                document.getElementById("alert-container").innerHTML = '<br><div class="alert alert-danger"><strong>Invalid IP Address</strong></div>';
+                return;
+            }
+            if (/[\W]/.test(name)) {
+                document.getElementById("alert-container2").innerHTML = '<br><div class="alert alert-danger"><strong>Names can only contain alphanumeric characters</strong></div>';
+                return;
+            }
+            var json = require('json-file');
+
+            // Load a JSON file 
+            var master = json.read('./connections/_master_.json');
+            master.set("connections", toString(parseInt(master.get('connections')) + 1));
+            master.set("names", master.get('names').concat(name.concat(';')));
+            master.writeSync();
+
+            var connection = json.read('./connections/'.concat(name).concat('.json'));
+            connection.set("name", name)
+            connection.set("ip", )
+        }
+    </script>
+</body>
+
+</html>

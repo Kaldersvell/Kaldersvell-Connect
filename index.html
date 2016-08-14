@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,53 +11,58 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
 
-  </head>
-  <body style="background-color: #555555; color: white;">
-    <div class="container-fluid fullHeight" style="background-color: #111111; text-align: center; margin: auto; content-align: center;">
-        
+</head>
+
+<body style="background-color: #111111; color: #999999;">
+    <div id="listing" class="container-fluid" style="background-color: #111111; text-align: center; margin: auto; padding-top: 20px; content-align: center;">
+        <div class="row">
+            <a href="new.html" class="btn btn-default" role="button" style="width: 75%;">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
+
     </div>
 
     <!-- Insert this line above script imports  -->
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <!-- Script imports etc  -->
-        <script src="jsLib/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- Insert this line after script imports -->
-    <script>if (window.module) module = window.module;</script>
-    
-    <script type="text/javascript">
-        function getContentHeight(){
-            if($(window).height() > 300)
-                {
-                    return $(window).height();
-                } else {
-                    return 300;
-                }
-            }
-        function dynCSS(){
-                $(".fullHeight").css("height", getContentHeight());
-                $(".thirdHeight").css("height", getContentHeight()/3);
-                $(".twoThirdHeight").css("height", 2*getContentHeight()/3);
-                $(".twoNinthHeight").css("height", 2*getContentHeight()/9);
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
         }
-        function ValidateIPaddress(ipaddress)   
-        {  
-            if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress))  
-            {  
-                return (true);  
-            }    
-            return (false); 
-        }  
-
-        dynCSS();
-        ip = window.prompt("Please input the IP address of a Raspberry Pi running Kaldersvell OS","127.0.0.1");
-        while(!ValidateIPaddress(ip)){
-            ip = window.prompt("Please input a valid IP address","127.0.0.1");
-        }
-
-
-        window.onresize = dynCSS;
     </script>
-  </body>
-</html>
+    <!-- Script imports etc  -->
+    <script src="jsLib/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Insert this line after script imports -->
+    <script>
+        if (window.module) module = window.module;
+    </script>
 
+    <script type="text/javascript">
+        $("#listing").append();
+
+        function getContentHeight() {
+            if ($(window).height() > 300) {
+                return $(window).height();
+            } else {
+                return 300;
+            }
+        }
+
+        function dynCSS() {
+            $(".fullHeight").css("height", window.height(); $(".thirdHeight").css("height", getContentHeight() / 3); $(".twoThirdHeight").css("height", 2 * getContentHeight() / 3); $(".twoNinthHeight").css("height", 2 * getContentHeight() / 9);
+            }
+
+            function ValidateIPaddress(ipaddress) {
+                if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
+                    return (true);
+                }
+                return (false);
+            }
+
+            dynCSS();
+            window.onresize = dynCSS;
+    </script>
+</body>
+
+</html>
