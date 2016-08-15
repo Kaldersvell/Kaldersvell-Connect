@@ -39,7 +39,35 @@
     </script>
 
     <script type="text/javascript">
-        $("#listing").append();
+        function getPosition(str, m, i) {
+            if (i = 0) {
+                return -1;
+            } else {
+                return str.split(m, i).join(m).length;
+            }
+        }
+
+        function appendStr(name) {
+            var json = require('json-file');
+            var connection = json.read('./connections/'.concat(name).concat('.json'));
+            var ip = connection.get("ip");
+            var str = '<a href="connection.html" class="btn btn-default" role="button" style="width: 75%;">'.concat(name).concat(' (').concat(ip).concat(') </a>');
+            return str;
+        }
+
+        function getNthName(n, strSet) {
+            return strSet.substring(getPosition(n) + 1, getPosition(n + 1));
+        }
+
+        var json = require('json-file');
+        var master = json.read('./connections/_master_.json');
+        var number = parseInt(master.get("connections"));
+        var setOfNames = master.get("names");
+
+        for (i = 0; i < number; i++) {
+            var name = getNthName(i, setOfNames);
+            $("#listing").append(appendStr(name));
+        }
 
         function getContentHeight() {
             if ($(window).height() > 300) {
@@ -50,18 +78,15 @@
         }
 
         function dynCSS() {
-            $(".fullHeight").css("height", window.height(); $(".thirdHeight").css("height", getContentHeight() / 3); $(".twoThirdHeight").css("height", 2 * getContentHeight() / 3); $(".twoNinthHeight").css("height", 2 * getContentHeight() / 9);
-            }
+            $(".fullHeight").css("height", window.height());
+            $(".thirdHeight").css("height", getContentHeight() / 3);
+            $(".twoThirdHeight").css("height", 2 * getContentHeight() / 3);
+            $(".twoNinthHeight").css("height", 2 * getContentHeight() / 9);
+        }
 
-            function ValidateIPaddress(ipaddress) {
-                if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
-                    return (true);
-                }
-                return (false);
-            }
 
-            dynCSS();
-            window.onresize = dynCSS;
+        dynCSS();
+        window.onresize = dynCSS;
     </script>
 </body>
 

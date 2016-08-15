@@ -66,6 +66,7 @@
         }
 
         function record() {
+            console.log("Starting Save...")
             if (document.getElementById('name') != null) {
                 var name = document.getElementById('name').value;
             } else {
@@ -96,10 +97,13 @@
             master.set("connections", toString(parseInt(master.get('connections')) + 1));
             master.set("names", master.get('names').concat(name.concat(';')));
             master.writeSync();
-
+            console.log("Saved to master");
             var connection = json.read('./connections/'.concat(name).concat('.json'));
-            connection.set("name", name)
-            connection.set("ip", )
+            connection.set("name", name);
+            connection.set("ip", ip);
+            connection.writeSync();
+            console.log("Saved to connections");
+
         }
     </script>
 </body>
